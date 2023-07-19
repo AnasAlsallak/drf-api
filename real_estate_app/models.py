@@ -28,3 +28,11 @@ class RealEstate (models.Model):
     def __str__(self):
         return self.name
 
+class RealEstateAgents(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    real_estate = models.ForeignKey(RealEstate, on_delete=models.CASCADE)
+    agent = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.real_estate.name + ' - ' + self.agent.username
